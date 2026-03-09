@@ -30,7 +30,7 @@ const categories = [
     {
         title: 'Concepts',
         icon: FiCpu,
-        skills: ['Distributed Systems', 'Microservices', 'RBAC', 'Consensus Algorithms'],
+        skills: ['Microservices', 'RBAC', 'Cloud Architecture', 'Networking'],
     },
 ];
 

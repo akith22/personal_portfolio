@@ -25,10 +25,10 @@ export default function About() {
                         className="flex flex-col justify-center space-y-6 text-muted text-lg leading-relaxed"
                     >
                         <p>
-                            I am a driven software engineer with a primary focus on <strong className="text-text-main font-medium">backend engineering and distributed systems</strong>. I thrive on solving complex architectural challenges and writing code that scales.
+                            I am a driven software engineer with a primary focus on <strong className="text-text-main font-medium">backend engineering and scalable architectures</strong>. I thrive on solving complex architectural challenges and writing code that scales.
                         </p>
                         <p>
-                            Having worked on projects ranging from Distributed File Systems utilizing Raft consensus, to full-stack Application Tracking Systems with strict RBAC, I understand the importance of building software that is not just functional, but reliable and maintainable.
+                            Having worked on projects ranging from complex backend services utilizing advanced networking, to full-stack Application Tracking Systems with strict RBAC, I understand the importance of building software that is not just functional, but reliable and maintainable.
                         </p>
                         <p>
                             Currently pursuing my BSc in Computer Science, I continuously seek to bridge the gap between academic theory and real-world system engineering.

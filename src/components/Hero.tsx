@@ -31,7 +31,7 @@ export default function Hero() {
                     </p>
 
                     <p className="text-base sm:text-lg text-muted mb-10 leading-relaxed max-w-lg">
-                        I engineer resilient distributed systems, build scalable APIs, and craft high-performance web applications focused on clean architecture and optimal user experiences.
+                        I engineer resilient backend services, build scalable APIs, and craft high-performance web applications focused on clean architecture and optimal user experiences.
                     </p>
 
                     <div className="flex flex-wrap items-center gap-4">
@@ -72,7 +72,7 @@ export default function Hero() {
                                 <p><span className="text-muted">passions:</span> [</p>
                                 <div className="pl-6">
                                     <p><span className="text-secondary">'Backend Architecture'</span>,</p>
-                                    <p><span className="text-secondary">'Distributed Systems'</span>,</p>
+                                    <p><span className="text-secondary">'API Development'</span>,</p>
                                     <p><span className="text-secondary">'Full-Stack Web'</span></p>
                                 </div>
                                 <p>],</p>

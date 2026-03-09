@@ -4,7 +4,7 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Achievements from './components/Achievements';
-import GitHub from './components/GitHub';
+
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -21,7 +21,7 @@ function App() {
         <Skills />
         <Projects />
         <Achievements />
-        <GitHub />
+
         <Contact />
       </main>
       <Footer />

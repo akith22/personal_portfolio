@@ -11,9 +11,9 @@ const projects = [
     },
     {
         title: 'AtlasFS',
-        tagline: 'Distributed File System',
-        description: 'Developed a fault-tolerant distributed storage system from scratch. Implemented the Raft consensus algorithm for reliable leader election, data replication, and automatic failure recovery.',
-        tech: ['Java', 'Sockets', 'Distributed Systems', 'Raft'],
+        tagline: 'Networked File System',
+        description: 'Developed a fault-tolerant network storage system from scratch. Implemented reliable data replication and automatic failure recovery across nodes.',
+        tech: ['Java', 'Sockets', 'Multithreading', 'Network Programming'],
     },
     {
         title: 'DiagNote',
@@ -56,7 +56,7 @@ export default function Projects() {
                 >
                     <div>
                         <h2 className="section-title">Selected <span className="gradient-text-primary">Work</span></h2>
-                        <p className="section-subtitle max-w-xl">Deep dives into backend architecture, distributed consensus, and full-stack software development.</p>
+                        <p className="section-subtitle max-w-xl">Deep dives into backend architecture, performance optimization, and full-stack software development.</p>
                     </div>
                     <a href="https://github.com/akith22" target="_blank" rel="noopener noreferrer" className="btn-secondary whitespace-nowrap hidden sm:flex">
                         <FiGithub className="w-4 h-4" /> View full GitHub

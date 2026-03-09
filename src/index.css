@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0B0B0F;
-  --color-surface: #12121A;
-  --color-primary: #7C5CFF;
-  --color-secondary: #22D3EE;
-  --color-text-main: #E5E7EB;
-  --color-muted: #9CA3AF;
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-bg: #030306;
+  --color-surface: rgba(255, 255, 255, 0.02);
+  --color-primary: #00E5FF;
+  --color-secondary: #8A2BE2;
+  --color-text-main: #FAFAFA;
+  --color-muted: #8892B0;
+  --color-border: rgba(255, 255, 255, 0.06);
 }
 
 * {
@@ -46,19 +46,19 @@ a {
 
 /* Premium Cards */
 .premium-card {
-  background: rgba(18, 18, 26, 0.6);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 16px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .premium-card-hover:hover {
-  background: rgba(24, 24, 34, 0.8);
-  border-color: rgba(124, 92, 255, 0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(124, 92, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(0, 229, 255, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 24px -6px rgba(0, 229, 255, 0.2);
 }
 
 /* Typography */
@@ -80,13 +80,15 @@ a {
 .gradient-text {
   background: linear-gradient(135deg, #E5E7EB 0%, #9CA3AF 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
 
 .gradient-text-primary {
-  background: linear-gradient(135deg, #7C5CFF 0%, #22D3EE 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
@@ -137,7 +139,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, #7C5CFF, #22D3EE);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: #ffffff;
   padding: 14px 28px;
   border-radius: 8px;
@@ -148,9 +150,9 @@ a {
 }
 
 .btn-gradient:hover {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px -5px rgba(124, 92, 255, 0.4);
+  box-shadow: 0 8px 25px -5px rgba(0, 229, 255, 0.5);
 }
 
 /* Forms */
@@ -201,14 +203,27 @@ a {
 
 /* Typewriter animation for revealing text */
 @keyframes typing {
-  0% { max-width: 0; }
-  40% { max-width: 100%; }
-  60% { max-width: 100%; }
-  100% { max-width: 0; }
+  0% {
+    max-width: 0;
+  }
+
+  40% {
+    max-width: 100%;
+  }
+
+  60% {
+    max-width: 100%;
+  }
+
+  100% {
+    max-width: 0;
+  }
 }
 
 @keyframes blink {
-  50% { border-color: transparent; }
+  50% {
+    border-color: transparent;
+  }
 }
 
 .typewriter {
@@ -239,4 +254,16 @@ button:focus-visible,
 a:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* Noise overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
 }
