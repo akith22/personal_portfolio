@@ -28,8 +28,8 @@ export default function Navbar() {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled
-                        ? 'bg-bg/80 backdrop-blur-md border-border'
-                        : 'bg-transparent border-transparent'
+                    ? 'bg-bg/80 backdrop-blur-md border-border'
+                    : 'bg-transparent border-transparent'
                     }`}
             >
                 <div className="container-base h-16 sm:h-20 flex items-center justify-between">
@@ -49,10 +49,10 @@ export default function Navbar() {
                             <a
                                 key={link.name}
                                 href={link.href}
-                                className="text-sm font-medium text-muted hover:text-text-main transition-colors relative group"
+                                className="text-sm font-medium text-muted hover:text-text-main transition-all duration-300 relative group"
                             >
                                 {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full group-hover:shadow-[0_0_6px_var(--color-primary)]" />
                             </a>
                         ))}
                     </div>
@@ -83,6 +83,8 @@ export default function Navbar() {
                         <FiMenu className="w-5 h-5" />
                     </button>
                 </div>
+                {/* Glow line underneath navbar */}
+                <div className="glow-line" style={{ opacity: scrolled ? 0.5 : 0, transition: 'opacity 0.3s ease' }} />
             </motion.nav>
 
             {/* Mobile Menu */}

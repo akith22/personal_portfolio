@@ -14,30 +14,35 @@ const projects = [
         tagline: 'Networked File System',
         description: 'Developed a fault-tolerant network storage system from scratch. Implemented reliable data replication and automatic failure recovery across nodes.',
         tech: ['Java', 'Sockets', 'Multithreading', 'Network Programming'],
+        github: 'https://github.com/akith22/AtlasFS-Distributed-File-Storage-System',
     },
     {
         title: 'DiagNote',
         tagline: 'Healthcare Management API',
         description: 'Designed a resilient healthcare platform backend connecting doctors, patients, and laboratories to enable seamless appointment scheduling and secure record management workflows.',
         tech: ['Spring Boot', 'MySQL', 'REST APIs', 'TypeScript'],
+        github: 'https://github.com/akith22/DiagNote',
     },
     {
         title: 'TestLang++',
         tagline: 'API Testing Domain-Specific Language',
         description: 'Created a custom compiled DSL allowing QA engineers to script HTTP requests in a highly intuitive syntax, which compilers down into executable, automated JUnit test suites natively.',
         tech: ['C', 'Flex', 'Bison', 'Java', 'JUnit'],
+        github: 'https://github.com/akith22/TestLang',
     },
     {
         title: 'FungiFlow',
         tagline: 'Production Management Platform',
         description: 'End-to-end full-stack platform managing localized mushroom lab production batches, utilizing relational architecture to track inventory inputs, timeline scheduling, and sales analytics.',
         tech: ['Java', 'Spring Boot', 'React', 'MySQL'],
+        github: 'https://github.com/akith22/FungiFlow',
     },
     {
         title: 'AlertEYE',
         tagline: 'Driver Safety Matrix',
         description: 'Edge-computing system detecting chronic driver fatigue in real-time leveraging raw computer vision heuristics and sensory data streamed to a central Firebase realtime dashboard.',
         tech: ['Python', 'OpenCV', 'Arduino', 'Firebase'],
+        github: 'https://github.com/akith22/AlertEYE',
     },
 ];
 

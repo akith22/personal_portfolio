@@ -10,7 +10,8 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="border-t border-border bg-bg/50">
+        <footer className="border-t border-border bg-bg/50 relative">
+            <div className="glow-line absolute top-0 left-0" />
             <div className="container-base py-12 flex flex-col md:flex-row items-center justify-between gap-6">
                 {/* Copyright */}
                 <p className="text-sm text-muted font-medium text-center md:text-left">

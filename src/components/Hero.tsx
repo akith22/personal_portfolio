@@ -4,9 +4,10 @@ import { FiArrowRight, FiDownload, FiGithub } from 'react-icons/fi';
 export default function Hero() {
     return (
         <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-            {/* Subtle Background Gradients */}
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 blur-[120px] rounded-full pointer-events-none" />
+            {/* Background Gradient Orbs */}
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/8 blur-[140px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[35%] h-[35%] bg-secondary/8 blur-[140px] rounded-full pointer-events-none" />
+            <div className="absolute top-[30%] right-[20%] w-[25%] h-[25%] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
             <div className="container-base relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
                 {/* Left Column: Content */}
@@ -76,7 +77,7 @@ export default function Hero() {
                                     <p><span className="text-secondary">'Full-Stack Web'</span></p>
                                 </div>
                                 <p>],</p>
-                                <p><span className="text-muted">execute:</span> <span className="text-primary">async</span> () <span className="text-primary">{'=>'}</span> {'{'}</p>
+                                <p><span className="text-muted">execute:</span> <span className="text-primary">async</span> () <span className="text-primary">{'=> '}</span> {'{'}</p>
                                 <div className="pl-6">
                                     <p><span className="text-primary">await</span> <span className="text-secondary">buildScalableSystems</span>();</p>
                                 </div>
