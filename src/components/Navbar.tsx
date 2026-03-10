@@ -68,7 +68,7 @@ export default function Navbar() {
                             <FiGithub className="w-4 h-4" />
                             GitHub
                         </a>
-                        <a href="/Akith_De_Silva_CV .pdf" download className="btn-secondary !py-2 !px-4 !text-sm">
+                        <a href="/Akith_De_Silva_CV.pdf" download className="btn-secondary !py-2 !px-4 !text-sm">
                             <FiDownload className="w-4 h-4" />
                             Download CV
                         </a>
@@ -130,7 +130,7 @@ export default function Navbar() {
                                 >
                                     <FiGithub /> GitHub
                                 </a>
-                                <a href="/Akith_De_Silva_CV .pdf" download className="btn-primary w-full justify-center">
+                                <a href="/Akith_De_Silva_CV.pdf" download className="btn-primary w-full justify-center">
                                     <FiDownload /> Download CV
                                 </a>
                             </motion.div>

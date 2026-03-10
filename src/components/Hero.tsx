@@ -40,7 +40,7 @@ export default function Hero() {
                             View Projects
                             <FiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </a>
-                        <a href="/Akith_De_Silva_CV .pdf" download className="btn-secondary">
+                        <a href="/Akith_De_Silva_CV.pdf" download className="btn-secondary">
                             <FiDownload className="w-4 h-4" />
                             Download CV
                         </a>
