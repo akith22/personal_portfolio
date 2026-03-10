@@ -5,7 +5,7 @@ const categories = [
     {
         title: 'Programming',
         icon: FiCode,
-        skills: ['Java', 'C', 'Python'],
+        skills: ['Java', 'C'],
     },
     {
         title: 'Frontend',
