@@ -25,7 +25,7 @@ const categories = [
     {
         title: 'Tools',
         icon: FiTool,
-        skills: ['Git', 'GitHub', 'Maven', 'Postman'],
+        skills: ['Git', 'GitHub', 'Maven', 'Postman', 'Jira'],
     },
     {
         title: 'Concepts',
