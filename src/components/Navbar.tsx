@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiDownload, FiMenu, FiX } from 'react-icons/fi';
+import { FiGithub, FiDownload, FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
+import { useTheme } from '../hooks/useTheme';
 
 const navLinks = [
     { name: 'Home', href: '#home' },
@@ -14,6 +15,7 @@ const navLinks = [
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const { theme, toggle } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -59,6 +61,13 @@ export default function Navbar() {
 
                     {/* Desktop Actions */}
                     <div className="hidden lg:flex items-center gap-4">
+                        <button
+                            onClick={toggle}
+                            aria-label="Toggle theme"
+                            className="text-muted hover:text-text-main transition-colors p-2 rounded-md hover:bg-white/5"
+                        >
+                            {theme === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
+                        </button>
                         <a
                             href="https://github.com/akith22"
                             target="_blank"
@@ -116,6 +125,16 @@ export default function Navbar() {
                                     {link.name}
                                 </motion.a>
                             ))}
+                            <motion.button
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: navLinks.length * 0.05 + 0.05 }}
+                                onClick={() => { toggle(); setMobileOpen(false); }}
+                                className="flex items-center gap-2 text-muted hover:text-text-main transition-colors text-lg"
+                            >
+                                {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
+                                {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                            </motion.button>
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
