@@ -37,8 +37,8 @@ export default function Navbar() {
                 <div className="container-base h-16 sm:h-20 flex items-center justify-between">
                     {/* Logo */}
                     <a href="#home" className="flex items-center gap-2 group">
-                        <div className="w-8 h-8 rounded-md bg-text-main text-bg flex items-center justify-center font-bold text-sm transition-transform group-hover:scale-105">
-                            A
+                        <div className="w-8 h-8 rounded-md bg-text-main text-bg flex items-center justify-center font-bold text-sm transition-transform group-hover:scale-105 overflow-hidden">
+                            <img src="/A.jpg" alt="Logo" className="w-full h-full object-cover" />
                         </div>
                         <span className="font-semibold text-text-main text-sm tracking-tight hidden sm:block">
                             Akith<span className="text-primary">.dev</span>
