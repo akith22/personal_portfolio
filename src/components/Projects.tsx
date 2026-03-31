@@ -6,7 +6,7 @@ const projects = [
         title: 'CVortex',
         tagline: 'Application Tracking System',
         description: 'Full-stack recruitment platform streamlining the hiring pipeline. Engineered with role-based access control, secure JWT auth, and complex relational mappings for precise application tracking.',
-        tech: ['Java', 'Spring Boot', 'React', 'MySQL'],
+        tech: ['Java', 'Spring Boot', 'React', 'MySQL', 'JWT Auth', 'RBAC', 'REST APIs'],
         github: 'https://github.com/akith22/CVortex-application-tracking-system',
     },
     {
@@ -20,7 +20,7 @@ const projects = [
         title: 'DiagNote',
         tagline: 'Healthcare Management API',
         description: 'Designed a resilient healthcare platform backend connecting doctors, patients, and laboratories to enable seamless appointment scheduling and secure record management workflows.',
-        tech: ['Spring Boot', 'MySQL', 'REST APIs', 'TypeScript'],
+        tech: ['Spring Boot', 'MySQL', 'REST APIs', 'TypeScript', 'React', 'JWT Auth'],
         github: 'https://github.com/akith22/DiagNote',
     },
     {
@@ -34,7 +34,7 @@ const projects = [
         title: 'FungiFlow',
         tagline: 'Production Management Platform',
         description: 'End-to-end full-stack platform managing localized mushroom lab production batches, utilizing relational architecture to track inventory inputs, timeline scheduling, and sales analytics.',
-        tech: ['Java', 'Spring Boot', 'React', 'MySQL'],
+        tech: ['Java', 'Spring Boot', 'React', 'MySQL', 'RBAC', 'REST APIs'],
         github: 'https://github.com/akith22/FungiFlow',
     },
     {

@@ -20,17 +20,17 @@ const categories = [
     {
         title: 'Databases',
         icon: FiDatabase,
-        skills: ['MySQL', 'Firebase', 'Relational Design'],
+        skills: ['MySQL', 'Relational Design'],
     },
     {
         title: 'Tools',
         icon: FiTool,
-        skills: ['Git', 'GitHub', 'Maven', 'Postman', 'Jira'],
+        skills: ['Git', 'GitHub', 'Maven', 'Postman', 'Jira', 'JUnit', 'Selenium(Pytest)'],
     },
     {
         title: 'Concepts',
         icon: FiCpu,
-        skills: ['Microservices', 'RBAC', 'Cloud Architecture', 'Networking'],
+        skills: ['OOP', 'Data Structures', 'DBMS', 'Software Engineering', 'Agile/Scrum', 'SDLC', 'UI/UX(Basic)'],
     },
 ];
 
