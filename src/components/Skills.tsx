@@ -61,10 +61,10 @@ export default function Skills() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                                className="premium-card premium-card-hover p-6 flex flex-col"
+                                className="glass-card p-6 flex flex-col"
                             >
                                 <div className="flex items-center gap-4 mb-6 pb-6 border-b border-border/50">
-                                    <div className="w-10 h-10 rounded-lg bg-surface flex items-center justify-center border border-border">
+                                    <div className="w-10 h-10 rounded-lg glass flex items-center justify-center">
                                         <Icon className="w-5 h-5 text-primary" />
                                     </div>
                                     <h3 className="text-lg font-bold text-text-main">{cat.title}</h3>

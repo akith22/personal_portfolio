@@ -43,7 +43,7 @@ export default function About() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="flex items-center"
                     >
-                        <div className="premium-card p-8 sm:p-10 w-full relative overflow-hidden">
+                        <div className="glass-card p-8 sm:p-10 w-full relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[80px] pointer-events-none" />
 
                             <h3 className="text-xs font-bold uppercase tracking-widest text-primary mb-6">Education</h3>

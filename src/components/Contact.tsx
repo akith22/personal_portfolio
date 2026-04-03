@@ -1,6 +1,6 @@
+import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { FiMail, FiPhone, FiLinkedin, FiArrowUpRight } from 'react-icons/fi';
+import { FiMail, FiPhone, FiLinkedin, FiSend, FiCheckCircle } from 'react-icons/fi';
 
 const contactInfo = [
     { icon: FiMail, label: 'Email', value: 'akithdesilva626@gmail.com', href: 'mailto:akithdesilva626@gmail.com' },
@@ -12,60 +12,127 @@ export default function Contact() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
+    const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+
+    const handleInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('loading');
+        
+        try {
+            // Replace YOUR_FORM_ID or use fallback
+            const res = await fetch("https://formspree.io/f/xvgzyryg", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+            if (res.ok) {
+                setStatus('success');
+                setFormData({ name: '', email: '', subject: '', message: '' });
+                setTimeout(() => setStatus('idle'), 3000);
+            } else {
+                window.location.href = `mailto:akithdesilva626@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(formData.message)}`;
+                setStatus('idle');
+            }
+        } catch (error) {
+            window.location.href = `mailto:akithdesilva626@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(formData.message)}`;
+            setStatus('idle');
+        }
+    };
+
+    const containerVariants = {
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.1 } }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    };
+
     return (
-        <section id="contact" className="section-padding relative" ref={ref}>
+        <section id="contact" className="section-padding relative min-h-[80vh] flex items-center" ref={ref}>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-bg pointer-events-none" />
 
-            <div className="container-base relative z-10">
+            <div className="container-base relative z-10 w-full">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                    className="mb-16 text-center"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={isInView ? 'visible' : 'hidden'}
+                    className="grid lg:grid-cols-2 gap-16 lg:gap-8 items-start"
                 >
-                    <h2 className="section-title">Start a <span className="gradient-text-primary">Conversation</span></h2>
-                    <p className="section-subtitle">Looking for a driven backend intern? Let's connect.</p>
-                </motion.div>
+                    {/* Left: Contact Info */}
+                    <div className="flex flex-col h-full">
+                        <motion.h2 variants={itemVariants} className="section-title mb-4">
+                            Start a <span className="gradient-text-primary">Conversation</span>
+                        </motion.h2>
+                        <motion.p variants={itemVariants} className="text-muted text-lg mb-12">
+                            Looking to collaborate on a backend project, API architecture, or hiring for a driven full-stack intern? I'm always open to discussing new opportunities.
+                        </motion.p>
+                        
+                        <div className="flex flex-col gap-4 mt-auto">
+                            {contactInfo.map((info, idx) => {
+                                const Icon = info.icon;
+                                return (
+                                    <motion.a
+                                        key={idx}
+                                        variants={itemVariants}
+                                        href={info.href}
+                                        target={info.href.startsWith('http') ? '_blank' : undefined}
+                                        rel="noopener noreferrer"
+                                        className="contact-row group flex items-center gap-5 px-6 py-5 glass-card"
+                                    >
+                                        <div className="w-12 h-12 shrink-0 rounded-xl bg-bg border border-border flex items-center justify-center transition-colors group-hover:border-primary/50 group-hover:bg-primary/5">
+                                            <Icon className="w-5 h-5 text-muted group-hover:text-primary transition-colors" />
+                                        </div>
+                                        <div className="flex flex-col gap-1 min-w-0 flex-1">
+                                            <span className="text-xs font-semibold uppercase tracking-widest text-muted/60">{info.label}</span>
+                                            <span className="text-base font-medium text-text-main truncate group-hover:text-primary transition-colors">{info.value}</span>
+                                        </div>
+                                    </motion.a>
+                                );
+                            })}
+                        </div>
+                    </div>
 
-                <div className="max-w-3xl mx-auto flex flex-col gap-4">
-                    {contactInfo.map((info, idx) => {
-                        const Icon = info.icon;
-                        return (
-                            <motion.a
-                                key={idx}
-                                href={info.href}
-                                target={info.href.startsWith('http') ? '_blank' : undefined}
-                                rel="noopener noreferrer"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                transition={{ duration: 0.5, delay: 0.15 + idx * 0.1 }}
-                                className="group flex items-center gap-5 px-6 py-5 sm:px-8 sm:py-6 rounded-2xl border border-border bg-surface/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.04] hover:shadow-[0_0_30px_-8px_rgba(0,212,170,0.15)]"
+                    {/* Right: Contact Form */}
+                    <motion.div variants={itemVariants} className="glass-card p-8 lg:p-10 w-full relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] pointer-events-none rounded-full" />
+                        
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
+                            <motion.div variants={itemVariants}>
+                                <label className="block text-sm font-semibold tracking-wide text-muted mb-2 font-mono">Name</label>
+                                <input required type="text" name="name" value={formData.name} onChange={handleInput} placeholder="Jane Doe" className="form-input" />
+                            </motion.div>
+                            <motion.div variants={itemVariants}>
+                                <label className="block text-sm font-semibold tracking-wide text-muted mb-2 font-mono">Email</label>
+                                <input required type="email" name="email" value={formData.email} onChange={handleInput} placeholder="jane@example.com" className="form-input" />
+                            </motion.div>
+                            <motion.div variants={itemVariants}>
+                                <label className="block text-sm font-semibold tracking-wide text-muted mb-2 font-mono">Subject</label>
+                                <input required type="text" name="subject" value={formData.subject} onChange={handleInput} placeholder="Internship Opportunity" className="form-input" />
+                            </motion.div>
+                            <motion.div variants={itemVariants}>
+                                <label className="block text-sm font-semibold tracking-wide text-muted mb-2 font-mono">Message</label>
+                                <textarea required name="message" value={formData.message} onChange={handleInput} placeholder="Hi Akith..." rows={5} className="form-input resize-none" />
+                            </motion.div>
+                            
+                            <motion.button 
+                                variants={itemVariants} 
+                                type="submit" 
+                                disabled={status !== 'idle'}
+                                className={`btn-glass py-4 w-full mt-2 flex items-center justify-center transition-all ${status === 'success' ? '!bg-tertiary/20' : ''}`}
                             >
-                                <div className="w-12 h-12 shrink-0 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center transition-all duration-300 group-hover:border-primary/40 group-hover:bg-primary/[0.08] group-hover:shadow-[0_0_16px_rgba(0,212,170,0.2)]">
-                                    <Icon className="w-5 h-5 text-muted transition-colors duration-300 group-hover:text-primary" />
-                                </div>
-                                <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-                                    <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted/50">{info.label}</span>
-                                    <span className="text-base sm:text-lg font-medium text-text-main truncate transition-colors duration-300 group-hover:text-primary">{info.value}</span>
-                                </div>
-                                <FiArrowUpRight className="w-5 h-5 text-muted/30 shrink-0 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                            </motion.a>
-                        );
-                    })}
-                </div>
-
-                {/* CTA Button */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className="flex justify-center mt-12"
-                >
-                    <a href="mailto:akithdesilva626@gmail.com" className="btn-gradient px-10 py-4 relative overflow-hidden group/btn shadow-[0_0_40px_-10px_rgba(0,212,170,0.4)]">
-                        <span className="relative z-10 flex items-center gap-2 text-lg">
-                            <FiMail className="w-5 h-5" /> Say Hello
-                        </span>
-                    </a>
+                                {status === 'loading' && <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+                                {status === 'success' && <><FiCheckCircle className="w-5 h-5"/> Message Sent!</>}
+                                {status === 'idle' && <><FiSend className="w-5 h-5"/> Send Message &rarr;</>}
+                            </motion.button>
+                        </form>
+                    </motion.div>
                 </motion.div>
             </div>
         </section>

@@ -15,101 +15,107 @@ const navLinks = [
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
     const { theme, toggle } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: '-30% 0px -70% 0px' }
+        );
+
+        document.querySelectorAll('section[id]').forEach((section) => observer.observe(section));
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            observer.disconnect();
+        };
     }, []);
 
     return (
         <>
             <motion.nav
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
+                initial={{ y: -100, x: "-50%" }}
+                animate={{ y: 0, x: "-50%" }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled
-                    ? 'bg-bg/80 backdrop-blur-md border-border'
-                    : 'bg-transparent border-transparent'
-                    }`}
+                className={`fixed top-4 left-1/2 w-[95%] max-w-[1100px] z-50 transition-all duration-300 rounded-[2rem] ${
+                    scrolled ? 'glass border border-white/10' : 'bg-transparent'
+                }`}
             >
-                <div className="container-base h-16 sm:h-20 flex items-center justify-between">
+                <div className="w-full h-14 sm:h-16 px-6 sm:px-8 flex items-center justify-between">
                     {/* Logo */}
                     <a href="#home" className="flex items-center gap-2 group">
-                        <div className="w-8 h-8 rounded-md bg-text-main text-bg flex items-center justify-center font-bold text-sm transition-transform group-hover:scale-105 overflow-hidden">
-                            <img src="/A.jpg" alt="Logo" className="w-full h-full object-cover" />
-                        </div>
-                        <span className="font-semibold text-text-main text-sm tracking-tight hidden sm:block">
-                            Akith<span className="text-primary">.dev</span>
-                        </span>
+                        <img src="/A.jpg" alt="Logo" className="h-8 w-auto object-contain rounded-md transition-transform group-hover:scale-105" />
                     </a>
 
                     {/* Desktop Links */}
-                    <div className="hidden lg:flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className="text-sm font-medium text-muted hover:text-text-main transition-all duration-300 relative group"
-                            >
-                                {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full group-hover:shadow-[0_0_6px_var(--color-primary)]" />
-                            </a>
-                        ))}
+                    <div className="hidden md:flex items-center gap-1">
+                        {navLinks.map((link) => {
+                            const isActive = activeSection === link.href.substring(1);
+                            return (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    className={`relative px-5 py-2 text-sm font-medium transition-colors duration-200 rounded-full ${
+                                        isActive
+                                            ? 'text-text-main'
+                                            : 'text-muted hover:text-text-main hover:bg-white/[0.03]'
+                                    }`}
+                                >
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="active-pill"
+                                            className="absolute inset-0 bg-white/[0.08] backdrop-blur-md border border-white/[0.12] rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_4px_12px_rgba(0,0,0,0.05)]"
+                                            initial={false}
+                                            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                                        />
+                                    )}
+                                    <span className="relative z-10">{link.name}</span>
+                                </a>
+                            );
+                        })}
                     </div>
 
                     {/* Desktop Actions */}
-                    <div className="hidden lg:flex items-center gap-4">
-                        <button
-                            onClick={toggle}
-                            aria-label="Toggle theme"
-                            className="text-muted hover:text-text-main transition-colors p-2 rounded-md hover:bg-white/5"
-                        >
-                            {theme === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
+                    <div className="hidden md:flex items-center gap-4">
+                        <button onClick={toggle} aria-label="Toggle theme" className="btn-glass !p-2.5">
+                            {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
                         </button>
-                        <a
-                            href="https://github.com/akith22"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-muted hover:text-text-main transition-colors flex items-center gap-2 text-sm font-medium"
-                        >
-                            <FiGithub className="w-4 h-4" />
-                            GitHub
+                        <a href="https://github.com/akith22" target="_blank" rel="noopener noreferrer" className="btn-glass !p-2.5">
+                            <FiGithub className="w-5 h-5" />
                         </a>
-                        <a href="/Akith_De_Silva_CV.pdf" download className="btn-secondary !py-2 !px-4 !text-sm">
-                            <FiDownload className="w-4 h-4" />
-                            Download CV
+                        <a href="/Akith_De_Silva_CV.pdf" download className="btn-glass ml-2">
+                            <FiDownload className="w-4 h-4" /> Download CV
                         </a>
                     </div>
 
                     {/* Mobile Toggle */}
-                    <button
-                        className="lg:hidden text-muted hover:text-text-main transition-colors p-2"
-                        onClick={() => setMobileOpen(true)}
-                        aria-label="Open menu"
-                    >
-                        <FiMenu className="w-5 h-5" />
+                    <button className="mobile-hamburger btn-glass !p-2" onClick={() => setMobileOpen(true)}>
+                        <FiMenu className="w-6 h-6" />
                     </button>
                 </div>
-                {/* Glow line underneath navbar */}
-                <div className="glow-line" style={{ opacity: scrolled ? 0.5 : 0, transition: 'opacity 0.3s ease' }} />
             </motion.nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Drawer */}
             <AnimatePresence>
                 {mobileOpen && (
                     <motion.div
-                        initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-                        animate={{ opacity: 1, backdropFilter: 'blur(16px)' }}
-                        exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-                        className="fixed inset-0 z-[60] bg-bg/95 flex flex-col justify-center items-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 glass-strong flex flex-col justify-center items-center"
                     >
-                        <button
-                            className="absolute top-6 right-6 text-muted hover:text-text-main p-2"
-                            onClick={() => setMobileOpen(false)}
-                        >
-                            <FiX className="w-6 h-6" />
+                        <button className="absolute top-6 right-6 text-muted hover:text-text-main p-3" onClick={() => setMobileOpen(false)}>
+                            <FiX className="w-8 h-8" />
                         </button>
                         <div className="flex flex-col items-center gap-8">
                             {navLinks.map((link, i) => (
@@ -120,37 +126,24 @@ export default function Navbar() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: i * 0.05 }}
                                     onClick={() => setMobileOpen(false)}
-                                    className="text-2xl font-semibold text-muted hover:text-text-main transition-colors"
+                                    className={`text-2xl font-display font-bold ${
+                                        activeSection === link.href.substring(1) ? 'text-primary' : 'text-text-main'
+                                    }`}
                                 >
                                     {link.name}
                                 </motion.a>
                             ))}
-                            <motion.button
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: navLinks.length * 0.05 + 0.05 }}
-                                onClick={() => { toggle(); setMobileOpen(false); }}
-                                className="flex items-center gap-2 text-muted hover:text-text-main transition-colors text-lg"
-                            >
-                                {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
-                                {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-                            </motion.button>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: navLinks.length * 0.05 }}
-                                className="flex flex-col items-center gap-4 mt-8"
-                            >
-                                <a
-                                    href="https://github.com/akith22"
-                                    className="btn-secondary w-full justify-center"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <FiGithub /> GitHub
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="pt-8 flex gap-6">
+                                <button onClick={() => { toggle(); setMobileOpen(false); }} className="btn-glass !p-3">
+                                    {theme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
+                                </button>
+                                <a href="https://github.com/akith22" target="_blank" rel="noopener noreferrer" className="btn-glass !p-3">
+                                    <FiGithub size={20} />
                                 </a>
-                                <a href="/Akith_De_Silva_CV.pdf" download className="btn-primary w-full justify-center">
-                                    <FiDownload /> Download CV
+                            </motion.div>
+                            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                                <a href="/Akith_De_Silva_CV.pdf" download className="btn-glass mt-4">
+                                    <FiDownload className="w-4 h-4" /> Download CV
                                 </a>
                             </motion.div>
                         </div>
