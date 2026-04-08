@@ -22,13 +22,7 @@ export default function Footer() {
             
             <div className="container-base relative z-10 py-12 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-border/30 pb-12 mb-8">
                 {/* Logo & Tagline */}
-                <div className="text-center md:text-left">
-                    <a href="#home" className="inline-flex items-center justify-center md:justify-start gap-2 group mb-2">
-                        <img src="/A.jpg" alt="Logo" className="h-8 w-auto object-contain rounded-md transition-transform group-hover:scale-105" />
-                    </a>
-                    <p className="text-muted mt-2 max-w-xs text-sm">Engineering backend services and scalable architectures.</p>
-                </div>
-
+               
                 {/* Quick Nav */}
                 <div className="flex flex-wrap items-center justify-center gap-6">
                     {navLinks.map(link => (
@@ -59,11 +53,11 @@ export default function Footer() {
             </div>
 
             {/* Bottom Bar */}
-            <div className="container-base text-center pb-8">
+            <div className="container-base text-left pb-8">
                 <p className="text-xs text-muted/60 font-medium">
-                    Built with React, Tailwind &amp; <span className="text-primary"></span> by Akith De Silva &copy; {year}
+                    {year} Akith De Silva
                 </p>
             </div>
         </footer>
     );
-}
+}  
