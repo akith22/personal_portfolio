@@ -11,6 +11,7 @@ export default function About() {
                     transition={{ duration: 0.6 }}
                     className="mb-16"
                 >
+                    <p className="text-xs font-mono uppercase tracking-[0.25em] text-primary/70 mb-3">About Me</p>
                     <h2 className="section-title">Beyond the <span className="gradient-text-primary">Code</span></h2>
                     <p className="section-subtitle">Engineering robust backend solutions and scalable architectures.</p>
                 </motion.div>

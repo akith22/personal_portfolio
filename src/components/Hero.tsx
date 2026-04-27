@@ -17,11 +17,11 @@ export default function Hero() {
 
     useEffect(() => {
         let timeout: ReturnType<typeof setTimeout>;
-        
+
         if (isDeleting) {
             if (displayText === '') {
                 setIsDeleting(false);
-                timeout = setTimeout(() => {}, 400);
+                timeout = setTimeout(() => { }, 400);
             } else {
                 timeout = setTimeout(() => {
                     setDisplayText(textToType.substring(0, displayText.length - 1));
@@ -43,11 +43,7 @@ export default function Hero() {
     }, [displayText, isDeleting]);
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
-            {/* Background Orbs */}
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/8 blur-[140px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[35%] h-[35%] bg-secondary/8 blur-[140px] rounded-full pointer-events-none" />
-            <div className="absolute top-[30%] right-[20%] w-[25%] h-[25%] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+        <section id="home" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden pb-32 sm:pb-40">
 
             <div className="container-base relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center py-20">
                 {/* Left Column */}
@@ -57,7 +53,7 @@ export default function Hero() {
                         variants={itemVariants}
                         initial="hidden"
                         animate="visible"
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border glass border-primary/30 mb-8"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border glass border-primary/30 mb-8 shadow-[0_0_16px_rgba(56,189,248,0.12)]"
                     >
                         <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
                         <span className="text-xs font-medium text-primary font-mono">Available for Internships</span>
@@ -74,13 +70,13 @@ export default function Hero() {
                     </motion.p>
 
                     <div className="mb-4">
-                        <h1 
+                        <h1
                             className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] relative w-max min-h-[1.1em] flex items-center"
                             style={{ fontFamily: '"Inter", sans-serif' }}
                         >
                             {/* Hidden full text to maintain container width and prevent layout shift */}
                             <span className="invisible pointer-events-none pr-4">{textToType}</span>
-                            
+
                             <span className="absolute inset-0 flex items-center">
                                 <span className="gradient-text-primary flex">
                                     {displayText.split('').map((char, index) => (
@@ -94,8 +90,8 @@ export default function Hero() {
                                         </motion.span>
                                     ))}
                                 </span>
-                                <motion.span 
-                                    animate={{ opacity: [1, 0] }} 
+                                <motion.span
+                                    animate={{ opacity: [1, 0] }}
                                     transition={{ repeat: Infinity, duration: 0.85, ease: "easeInOut", repeatType: "mirror" }}
                                     className="text-primary font-light ml-[1px] -mt-[0.05em]"
                                 >
@@ -185,6 +181,65 @@ export default function Hero() {
                 </motion.div>
             </div>
 
+            {/* ── Ticker Strips ── */}
+            <div className="absolute bottom-0 left-0 right-0">
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-0" />
+
+                {/* Strip 1 — Role/Services keywords */}
+                <div className="ticker-wrap py-3 border-t border-b border-border/25">
+                    <div className="ticker-track" style={{ animationDuration: '30s' }}>
+                        {Array.from({ length: 2 }).map((_, di) => (
+                            <span key={di} className="flex items-center whitespace-nowrap">
+                                {[
+                                    'Backend Development', '✦', 'API Architecture', '✦',
+                                    'Full-Stack Engineering', '✦', 'Distributed Systems', '✦',
+                                    'Spring Boot', '✦', 'REST APIs', '✦',
+                                    'System Design', '✦', 'Clean Architecture', '✦',
+                                ].map((item, idx) => (
+                                    <span
+                                        key={idx}
+                                        className={`mx-4 text-xs font-mono uppercase tracking-widest
+                                            ${item === '✦'
+                                                ? 'text-primary/35 mx-2'
+                                                : 'text-muted/50'
+                                            }`}
+                                    >
+                                        {item}
+                                    </span>
+                                ))}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Strip 2 — Tech keywords, reverse direction */}
+                <div className="ticker-wrap py-3 border-b border-border/20">
+                    <div className="ticker-track-reverse" style={{ animationDuration: '42s' }}>
+                        {Array.from({ length: 2 }).map((_, di) => (
+                            <span key={di} className="flex items-center whitespace-nowrap">
+                                {[
+                                    'Java', '✦', 'Spring Boot', '✦',
+                                    'React', '✦', 'TypeScript', '✦',
+                                    'MySQL', '✦', 'JWT Auth', '✦',
+                                    'Maven', '✦', 'Git & GitHub', '✦',
+                                    'Postman', '✦', 'JUnit 5', '✦',
+                                ].map((item, idx) => (
+                                    <span
+                                        key={idx}
+                                        className={`mx-4 text-xs font-mono uppercase tracking-widest
+                                            ${item === '✦'
+                                                ? 'text-secondary/35 mx-2'
+                                                : 'text-muted/45'
+                                            }`}
+                                    >
+                                        {item}
+                                    </span>
+                                ))}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
 
         </section>
     );

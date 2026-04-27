@@ -22,7 +22,7 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
-        
+
         try {
             // Replace YOUR_FORM_ID or use fallback
             const res = await fetch("https://formspree.io/f/xvgzyryg", {
@@ -67,13 +67,16 @@ export default function Contact() {
                 >
                     {/* Left: Contact Info */}
                     <div className="flex flex-col h-full">
+                        <motion.p variants={itemVariants} className="text-xs font-mono uppercase tracking-[0.25em] text-primary/70 mb-3">
+                            Get In Touch
+                        </motion.p>
                         <motion.h2 variants={itemVariants} className="section-title mb-4">
                             Start a <span className="gradient-text-primary">Conversation</span>
                         </motion.h2>
                         <motion.p variants={itemVariants} className="text-muted text-lg mb-12">
                             Looking to collaborate on a backend project, API architecture, or hiring for a driven full-stack intern? I'm always open to discussing new opportunities.
                         </motion.p>
-                        
+
                         <div className="flex flex-col gap-4 mt-auto">
                             {contactInfo.map((info, idx) => {
                                 const Icon = info.icon;
@@ -102,7 +105,7 @@ export default function Contact() {
                     {/* Right: Contact Form */}
                     <motion.div variants={itemVariants} className="glass-card p-8 lg:p-10 w-full relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] pointer-events-none rounded-full" />
-                        
+
                         <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
                             <motion.div variants={itemVariants}>
                                 <label className="block text-sm font-semibold tracking-wide text-muted mb-2 font-mono">Name</label>
@@ -120,16 +123,16 @@ export default function Contact() {
                                 <label className="block text-sm font-semibold tracking-wide text-muted mb-2 font-mono">Message</label>
                                 <textarea required name="message" value={formData.message} onChange={handleInput} placeholder="Hi Akith..." rows={5} className="form-input resize-none" />
                             </motion.div>
-                            
-                            <motion.button 
-                                variants={itemVariants} 
-                                type="submit" 
+
+                            <motion.button
+                                variants={itemVariants}
+                                type="submit"
                                 disabled={status !== 'idle'}
                                 className={`btn-glass py-4 w-full mt-2 flex items-center justify-center transition-all ${status === 'success' ? '!bg-tertiary/20' : ''}`}
                             >
                                 {status === 'loading' && <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
-                                {status === 'success' && <><FiCheckCircle className="w-5 h-5"/> Message Sent!</>}
-                                {status === 'idle' && <><FiSend className="w-5 h-5"/> Send Message &rarr;</>}
+                                {status === 'success' && <><FiCheckCircle className="w-5 h-5" /> Message Sent!</>}
+                                {status === 'idle' && <><FiSend className="w-5 h-5" /> Send Message &rarr;</>}
                             </motion.button>
                         </form>
                     </motion.div>

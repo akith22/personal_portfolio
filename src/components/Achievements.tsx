@@ -51,6 +51,7 @@ export default function Achievements() {
                     transition={{ duration: 0.6 }}
                     className="mb-20 text-center"
                 >
+                    <p className="text-xs font-mono uppercase tracking-[0.25em] text-primary/70 mb-3">Recognition</p>
                     <h2 className="section-title">Awards &amp; <span className="gradient-text-primary">Recognition</span></h2>
                     <p className="section-subtitle">Milestones achieved along the journey.</p>
                 </motion.div>
@@ -78,7 +79,7 @@ export default function Achievements() {
 
                             return (
                                 <motion.div key={i} variants={itemVariants} className="relative w-full flex flex-col md:flex-row items-center justify-between">
-                                    
+
                                     {/* Sub-block Left */}
                                     <div className={`w-full md:w-[45%] ${isEven ? 'md:order-1 md:text-right' : 'md:order-3 md:text-left'} pl-6 md:pl-0`}>
                                         <div className="glass-card shimmer-effect p-6 flex flex-col items-start md:items-stretch group border-border hover:border-primary/30 transition-all duration-300">
